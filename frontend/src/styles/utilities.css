@@ -1,0 +1,218 @@
+/* ===== Grid helpers ===== */
+.grid-1,
+.grid-2,
+.grid-3,
+.grid-4,
+.grid-5-3-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .grid-2,
+  .grid-3,
+  .grid-4,
+  .grid-5-3-2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .grid-5-3-2 {
+    grid-template-columns: 3fr 2fr;
+  }
+}
+
+@media (min-width: 1280px) {
+  .grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ===== Utility helpers ===== */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.flex-row {
+  display: flex;
+  align-items: center;
+}
+.flex-col-md-row {
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 768px) {
+  .flex-col-md-row {
+    flex-direction: row;
+  }
+}
+.gap-2 {
+  gap: 8px;
+}
+.gap-3 {
+  gap: 12px;
+}
+.gap-4 {
+  gap: 16px;
+}
+.gap-5 {
+  gap: 20px;
+}
+.gap-6 {
+  gap: 24px;
+}
+.gap-8 {
+  gap: 32px;
+}
+.gap-x-8 {
+  column-gap: 32px;
+}
+.gap-y-6 {
+  row-gap: 24px;
+}
+.w-full {
+  width: 100%;
+}
+.text-center {
+  text-align: center;
+}
+.text-sm {
+  font-size: 14px;
+}
+.text-muted {
+  color: var(--c-text-muted);
+}
+.text-accent {
+  color: var(--c-accent);
+}
+.font-semibold {
+  font-weight: 600;
+}
+.overflow-x-auto {
+  overflow-x: auto;
+}
+.p-4 {
+  padding: 16px;
+}
+.mb-2 {
+  margin-bottom: 8px;
+}
+.mb-1 {
+  margin-bottom: 4px;
+}
+.mb-4 {
+  margin-bottom: 16px;
+}
+.mb-6 {
+  margin-bottom: 24px;
+}
+.mb-8 {
+  margin-bottom: 32px;
+}
+.my-4 {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+.mt-4 {
+  margin-top: 16px;
+}
+.mt-6 {
+  margin-top: 24px;
+}
+.mt-8 {
+  margin-top: 32px;
+}
+.pb-4 {
+  padding-bottom: 16px;
+}
+.pb-8 {
+  padding-bottom: 32px;
+}
+.px-8 {
+  padding-left: 32px;
+  padding-right: 32px;
+}
+.ml-auto {
+  margin-left: auto;
+}
+.rounded-xl {
+  border-radius: 12px;
+}
+.border-b {
+  border-bottom: 1px solid var(--c-border);
+}
+.border-border {
+  border-color: var(--c-border);
+}
+.border-l-4 {
+  border-left-width: 4px;
+  border-left-style: solid;
+}
+.border-primary {
+  border-color: var(--c-primary);
+}
+.border-accent {
+  border-color: var(--c-accent);
+}
+.bg-slate-50 {
+  background: #f8fafc;
+}
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+.col-span-2 {
+  grid-column: span 2;
+}
+
+@media (min-width: 640px) {
+  .sm\:col-span-1 {
+    grid-column: span 1;
+  }
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ===== Typography ===== */
+.text-2xl {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--c-text-primary);
+  letter-spacing: -0.02em;
+}
+.text-subtitle {
+  font-size: 15px;
+  color: var(--c-text-secondary);
+}
+.section-header {
+  margin-bottom: 32px;
+}
+
+/* Resident quick actions should stay single-column on narrow cards. */
+.quick-actions-grid {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .quick-actions-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

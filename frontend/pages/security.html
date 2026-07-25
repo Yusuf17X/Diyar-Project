@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diyar — Security Portal</title>
+    <meta name="description" content="Diyar Security Guard Portal — Gate control, visitor verification, and access audit logs." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../src/styles/security-premium.css" />
+  </head>
+  <body class="security-premium">
+    <div class="sg-layout">
+      <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+      <!-- ══ Sidebar ════════════════════════════════════════ -->
+      <aside id="sidebar" class="sg-sidebar">
+
+        <!-- Brand -->
+        <div class="sg-brand">
+          <div class="sg-brand-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <div>
+            <h1 class="sg-brand-title">Diyar</h1>
+            <p class="sg-brand-sub">Security Portal</p>
+          </div>
+        </div>
+
+        <!-- Nav -->
+        <div class="sg-nav-label">Navigation</div>
+        <nav class="sg-nav">
+          <a class="sidebar-link" href="../gateway.html">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            Home
+          </a>
+          <button class="sidebar-link active" data-target="gate-control">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+              <rect x="7" y="7" width="3" height="3"></rect>
+              <rect x="14" y="7" width="3" height="3"></rect>
+              <rect x="7" y="14" width="3" height="3"></rect>
+              <rect x="14" y="14" width="3" height="3"></rect>
+            </svg>
+            Gate Control
+          </button>
+          <button class="sidebar-link" data-target="guest-directory">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            Guest Directory
+          </button>
+          <button class="sidebar-link" data-target="access-logs">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+            Access Logs
+          </button>
+        </nav>
+
+        <!-- Security state badge -->
+        <div class="sg-status-block" style="margin-top: 24px;">
+          <div class="sg-status-dot"></div>
+          <div>
+            <div class="sg-status-label">GATE ONLINE</div>
+            <div style="font-size: 11px; color: var(--sg-text-muted); margin-top: 1px;">All systems nominal</div>
+          </div>
+        </div>
+
+        <!-- User profile -->
+        <div class="sg-user">
+          <div class="sg-user-info">
+            <div class="sg-user-avatar" id="guard-avatar">SG</div>
+            <div>
+              <p class="sg-user-name" id="guard-name">Officer Al-Diyar</p>
+              <p class="sg-user-role" id="guard-role">GATE SUPERVISOR</p>
+            </div>
+          </div>
+          <button class="sg-logout-btn" id="logout-btn" title="Sign out">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+          </button>
+        </div>
+      </aside>
+
+      <!-- ══ Main Content ══════════════════════════════════ -->
+      <div class="sg-main">
+
+        <!-- Topbar -->
+        <header class="sg-topbar">
+          <div class="sg-topbar-left">
+            <button id="mobile-menu-btn" class="sg-mobile-btn" aria-label="Open menu">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+            </button>
+            <div class="sg-breadcrumb">
+              Portal &rsaquo; <span id="breadcrumb-text" class="sg-breadcrumb-page">Gate Control</span>
+            </div>
+          </div>
+          <div class="sg-topbar-right">
+            <div class="sg-time-badge">
+              <span id="sg-live-time">--:--:--</span>
+            </div>
+            <a href="./admin.html" class="sg-topbar-link">Admin View</a>
+          </div>
+        </header>
+
+        <!-- ══════════════════════════════════════════════════ -->
+        <!-- PAGE 1 — Gate Control                             -->
+        <!-- ══════════════════════════════════════════════════ -->
+        <main id="gate-control" class="page-content active">
+
+          <div class="sg-page-header">
+            <h2 class="sg-page-title">Gate Control</h2>
+            <p class="sg-page-subtitle">Scan or manually verify visitor QR codes to grant compound access</p>
+          </div>
+
+          <!-- Metric row -->
+          <div class="sg-metrics-grid">
+            <div class="sg-metric-card">
+              <div>
+                <p class="sg-metric-label">Passes Scanned</p>
+                <h3 id="scans-count" class="sg-metric-value">42</h3>
+              </div>
+              <div class="sg-metric-icon" style="background: var(--sg-blue-subtle); color: var(--sg-blue);">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                  <rect x="7" y="7" width="3" height="3"></rect>
+                  <rect x="14" y="7" width="3" height="3"></rect>
+                  <rect x="7" y="14" width="3" height="3"></rect>
+                  <rect x="14" y="14" width="3" height="3"></rect>
+                </svg>
+              </div>
+            </div>
+            <div class="sg-metric-card">
+              <div>
+                <p class="sg-metric-label">Active Visitors</p>
+                <h3 id="active-visitors-count" class="sg-metric-value">8</h3>
+              </div>
+              <div class="sg-metric-icon" style="background: rgba(6, 182, 212, 0.1); color: #06b6d4;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                </svg>
+              </div>
+            </div>
+            <div class="sg-metric-card">
+              <div>
+                <p class="sg-metric-label">Security State</p>
+                <h3 class="sg-metric-value" style="font-size: 22px; color: var(--sg-green); font-family: 'Fira Code', monospace;">SECURE</h3>
+              </div>
+              <div class="sg-metric-icon" style="background: var(--sg-green-subtle); color: var(--sg-green);">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                  <polyline points="9 12 11 14 15 10"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scanner + Result -->
+          <div class="sg-scanner-grid">
+
+            <!-- Left: Scanner panel -->
+            <div class="sg-scanner-card">
+              <!-- Animated scan frame -->
+              <div class="sg-scan-frame-outer">
+                <div class="sg-scan-frame-inner-bl"></div>
+                <div class="sg-scan-frame-inner-br"></div>
+                <div class="sg-scan-area">
+                  <div class="sg-scan-laser"></div>
+                  <svg class="sg-qr-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                    <rect x="7" y="7" width="3" height="3"></rect>
+                    <rect x="14" y="7" width="3" height="3"></rect>
+                    <rect x="7" y="14" width="3" height="3"></rect>
+                    <rect x="14" y="14" width="3" height="3"></rect>
+                  </svg>
+                </div>
+              </div>
+
+              <h3 class="sg-scanner-title">Scanner Active</h3>
+              <p class="sg-scanner-subtitle">Position the visitor pass QR code within the frame, or enter the visitor ID manually below.</p>
+
+              <form id="manual-verify-form" class="sg-verify-form">
+                <input
+                  type="text"
+                  id="visitor-token-input"
+                  class="sg-input"
+                  placeholder="Enter Visitor ID  e.g. V-ABC123"
+                  autocomplete="off"
+                  spellcheck="false"
+                />
+                <button type="submit" class="sg-btn-primary" id="manual-verify-btn">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Verify
+                </button>
+              </form>
+            </div>
+
+            <!-- Right: Verification result -->
+            <div class="sg-result-card">
+              <div class="sg-result-card-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                Verification Result
+              </div>
+
+              <!-- Placeholder state -->
+              <div id="result-placeholder" class="sg-result-placeholder">
+                <div class="sg-result-placeholder-icon">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                    <rect x="7" y="7" width="3" height="3"></rect>
+                    <rect x="14" y="7" width="3" height="3"></rect>
+                    <rect x="7" y="14" width="3" height="3"></rect>
+                    <rect x="14" y="14" width="3" height="3"></rect>
+                  </svg>
+                </div>
+                <p style="font-size: 15px; font-weight: 600; color: var(--sg-text-dim); margin: 0;">Awaiting Verification</p>
+                <p style="font-size: 12.5px; margin: 0; max-width: 200px; text-align: center;">Scan a visitor QR code or enter their ID to see result.</p>
+              </div>
+
+              <!-- Access approved card -->
+              <div id="result-access-card" class="sg-access-card">
+                <div class="sg-access-header">
+                  <div id="result-status-badge" class="sg-access-badge-approved">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    ACCESS APPROVED
+                  </div>
+                  <span id="result-pass-id" class="sg-pass-id"></span>
+                </div>
+
+                <div class="sg-detail-rows">
+                  <div class="sg-detail-row">
+                    <span class="sg-detail-key">Guest Name</span>
+                    <span id="result-guest-name" class="sg-detail-val"></span>
+                  </div>
+                  <div class="sg-detail-row">
+                    <span class="sg-detail-key">Host Resident</span>
+                    <span id="result-host-name" class="sg-detail-val"></span>
+                  </div>
+                  <div class="sg-detail-row">
+                    <span class="sg-detail-key">Purpose</span>
+                    <span id="result-purpose" class="sg-detail-val" style="color: var(--sg-text-dim);"></span>
+                  </div>
+                  <div class="sg-detail-row">
+                    <span class="sg-detail-key">Visit Date</span>
+                    <span id="result-date" class="sg-detail-val"></span>
+                  </div>
+                  <div class="sg-detail-row">
+                    <span class="sg-detail-key">Entry Limit</span>
+                    <span class="sg-detail-val" style="color: var(--sg-amber);">Single Entry</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <!-- ══════════════════════════════════════════════════ -->
+        <!-- PAGE 2 — Guest Directory                          -->
+        <!-- ══════════════════════════════════════════════════ -->
+        <main id="guest-directory" class="page-content">
+
+          <div class="sg-page-header">
+            <h2 class="sg-page-title">Guest Directory</h2>
+            <p class="sg-page-subtitle">All visitor passes issued for this compound — search, review, and revoke</p>
+          </div>
+
+          <div class="sg-glass-card">
+            <div class="sg-section-header">
+              <div>
+                <div class="sg-card-title">Active Guest Passes</div>
+                <div class="sg-card-subtitle" id="guest-count-label">Loading passes...</div>
+              </div>
+              <div class="sg-search-wrap">
+                <svg class="sg-search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input
+                  type="text"
+                  id="guest-search"
+                  class="sg-search-input"
+                  placeholder="Search name or pass ID..."
+                  autocomplete="off"
+                />
+              </div>
+            </div>
+
+            <div class="sg-table-wrap">
+              <table class="sg-table">
+                <thead>
+                  <tr>
+                    <th>Pass ID</th>
+                    <th>Guest Name</th>
+                    <th>Purpose</th>
+                    <th>Visit Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="directory-table-body">
+                  <tr><td colspan="6" style="text-align: center; color: var(--sg-text-muted); padding: 40px;">Loading...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </main>
+
+        <!-- ══════════════════════════════════════════════════ -->
+        <!-- PAGE 3 — Access Logs                              -->
+        <!-- ══════════════════════════════════════════════════ -->
+        <main id="access-logs" class="page-content">
+
+          <div class="sg-page-header">
+            <h2 class="sg-page-title">Access Logs</h2>
+            <p class="sg-page-subtitle">Register checkpoint events and view the compound access audit trail</p>
+          </div>
+
+          <div class="sg-logs-grid">
+
+            <!-- Form -->
+            <div class="sg-glass-card">
+              <div class="sg-card-title">Register Event</div>
+              <div class="sg-card-subtitle">Log a gate checkpoint activity manually</div>
+
+              <form id="new-log-form">
+                <div class="sg-form-group">
+                  <label class="sg-form-label" for="log-event-type">Event Type</label>
+                  <select id="log-event-type" class="sg-input">
+                    <option value="ENTRY">ENTRY — Visitor checked in</option>
+                    <option value="EXIT">EXIT — Visitor checked out</option>
+                    <option value="GATE_ACCESS">GATE ACCESS — Resident pass</option>
+                    <option value="PATROL">PATROL — Routine check</option>
+                    <option value="INCIDENT">INCIDENT — Security report</option>
+                  </select>
+                </div>
+                <div class="sg-form-group">
+                  <label class="sg-form-label" for="log-details">Description</label>
+                  <textarea
+                    id="log-details"
+                    class="sg-input"
+                    rows="5"
+                    placeholder="Enter specific notes — e.g. Courier delivery scanned at Main Gate..."
+                    required
+                  ></textarea>
+                </div>
+                <button type="submit" class="sg-btn-primary" style="width: 100%;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M5 12h14"></path>
+                  </svg>
+                  Record Event
+                </button>
+              </form>
+            </div>
+
+            <!-- Log table -->
+            <div class="sg-glass-card">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                <div class="sg-card-title">Checkpoint Audit Trail</div>
+                <button id="refresh-logs-btn" class="sg-btn-secondary" style="font-size: 12px; padding: 7px 14px;">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="23 4 23 10 17 10"></polyline>
+                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                  </svg>
+                  Refresh
+                </button>
+              </div>
+              <div class="sg-card-subtitle" style="margin-bottom: 20px;">Today's access checkpoint records</div>
+
+              <div class="sg-table-wrap">
+                <table class="sg-table">
+                  <thead>
+                    <tr>
+                      <th>Time</th>
+                      <th>Event Type</th>
+                      <th>Details</th>
+                    </tr>
+                  </thead>
+                  <tbody id="logs-table-body">
+                    <tr><td colspan="3" style="text-align: center; color: var(--sg-text-muted); padding: 40px;">Loading...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </main>
+
+      </div><!-- /.sg-main -->
+    </div><!-- /.sg-layout -->
+
+    <div id="toast-container" class="toast-container"></div>
+    <script src="../src/shared/api.js"></script>
+    <script src="../src/shared/ui.js"></script>
+    <script src="../src/pages/security.js"></script>
+  </body>
+</html>

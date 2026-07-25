@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diyar - Resident Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../src/styles/components.css" />
+    <link rel="stylesheet" href="../src/styles/resident-premium.css" />
+  </head>
+  <body class="resident-premium">
+    <div class="rp-layout">
+      <!-- Floating Sidebar -->
+      <aside id="sidebar" class="rp-sidebar">
+        <div class="rp-brand">
+          <div class="rp-brand-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+              <path d="M9 22v-4h6v4"></path>
+            </svg>
+          </div>
+          <div>
+            <h1 style="font-size: 20px; font-weight: 700; margin: 0; letter-spacing: -0.5px;">Diyar</h1>
+            <p style="color: rgba(255,255,255,0.7); font-size: 13px; margin: 0;">Resident Portal</p>
+          </div>
+        </div>
+
+        <nav class="rp-nav">
+          <a class="sidebar-link" href="../gateway.html">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            Home
+          </a>
+          <button class="sidebar-link active resident-active" data-target="overview">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            Overview
+          </button>
+          <button class="sidebar-link" data-target="billing">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+            Billing & Payments
+          </button>
+          <button class="sidebar-link" data-target="maintenance">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+            Maintenance
+          </button>
+          <button class="sidebar-link" data-target="visitor">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
+            Visitor Pass
+          </button>
+          <button class="sidebar-link" data-target="profile">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            My Profile
+          </button>
+        </nav>
+
+        <div class="rp-user">
+          <div class="rp-user-avatar">S</div>
+          <div>
+            <p style="font-weight: 600; font-size: 15px; margin: 0;">Sarah Mitchell</p>
+            <p style="color: rgba(255,255,255,0.7); font-size: 13px; margin: 0;">Unit 4B</p>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <div class="rp-main">
+        <header class="rp-topbar">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <button id="mobile-menu-btn" style="display: none;">Menu</button>
+            <p style="font-size: 14px; color: var(--rp-text-muted); font-weight: 500;">
+              Portal / <span id="breadcrumb-text" style="color: var(--rp-text-main); font-weight: 600;">Overview</span>
+            </p>
+          </div>
+          <a href="./admin.html" style="color: var(--rp-teal); text-decoration: none; font-weight: 600; font-size: 14px; border: 1px solid rgba(15, 118, 110, 0.2); padding: 8px 16px; border-radius: 8px;">Switch To Admin View</a>
+        </header>
+
+        <!-- Overview -->
+        <main id="overview" class="page-content active">
+          <div class="rp-hero">
+            <div style="position: relative; z-index: 1;">
+              <h2>Welcome home, Sarah.</h2>
+              <p>Here is your estate summary for Unit 4B.</p>
+              
+              <div style="display: flex; gap: 48px; margin-top: 48px;">
+                <div>
+                  <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px;">Account Balance</p>
+                  <h3 id="overview-balance" style="font-size: 48px; font-weight: 700; margin: 0; letter-spacing: -2px;"></h3>
+                  <button class="rp-action-link" style="color: var(--rp-gold); margin-top: 12px;" data-nav="billing">Pay Invoice →</button>
+                </div>
+                <div style="width: 1px; background: rgba(255,255,255,0.2);"></div>
+                <div>
+                  <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px;">Active Passes</p>
+                  <h3 id="overview-passes" style="font-size: 48px; font-weight: 700; margin: 0;">0</h3>
+                  <button class="rp-action-link" style="color: var(--rp-gold); margin-top: 12px;" data-nav="visitor">Manage →</button>
+                </div>
+                <div style="width: 1px; background: rgba(255,255,255,0.2);"></div>
+                <div>
+                  <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px;">Maintenance</p>
+                  <h3 id="overview-tickets" style="font-size: 48px; font-weight: 700; margin: 0;">0</h3>
+                  <button class="rp-action-link" style="color: var(--rp-gold); margin-top: 12px;" data-nav="maintenance">View Tickets →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rp-grid-2">
+            <div class="glass-card">
+              <h3 style="font-size: 20px; font-weight: 700; margin: 0 0 24px 0; padding-bottom: 16px; border-bottom: 1px solid rgba(0,0,0,0.05);">Recent Announcements</h3>
+              <div id="overview-announcements" style="display: flex; flex-direction: column; gap: 16px;">
+                <!-- Announcements injected here -->
+              </div>
+            </div>
+            
+            <div class="glass-card" style="background: linear-gradient(to bottom, #FFFFFF, #F8FAFC);">
+              <h3 style="font-size: 20px; font-weight: 700; margin: 0 0 24px 0; padding-bottom: 16px; border-bottom: 1px solid rgba(0,0,0,0.05);">Quick Actions</h3>
+              <div class="rp-grid-2">
+                <button style="background: white; border: 1px solid rgba(0,0,0,0.05); border-radius: 16px; padding: 24px; text-align: left; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.02); transition: all 0.2s;" data-nav="visitor">
+                  <div style="width: 48px; height: 48px; border-radius: 12px; background: #EEF2FF; color: #4F46E5; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                  </div>
+                  <span style="font-weight: 600; font-size: 15px;">New Visitor Pass</span>
+                </button>
+                <button style="background: white; border: 1px solid rgba(0,0,0,0.05); border-radius: 16px; padding: 24px; text-align: left; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.02); transition: all 0.2s;" data-nav="maintenance">
+                  <div style="width: 48px; height: 48px; border-radius: 12px; background: #FFF7ED; color: #EA580C; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                  </div>
+                  <span style="font-weight: 600; font-size: 15px;">Request Repair</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <!-- Billing -->
+        <main id="billing" class="page-content">
+          <div style="margin-bottom: 40px;">
+            <h2 style="font-size: 32px; font-weight: 700; margin: 0 0 8px 0; letter-spacing: -1px;">Billing & Payments</h2>
+            <p style="color: var(--rp-text-muted); font-size: 16px; margin: 0;">Manage your invoices for Unit 4B.</p>
+          </div>
+
+          <div class="rp-grid-2">
+            <!-- The Black Card Invoice -->
+            <div id="invoice-card" class="black-card rp-mb-8">
+              <div class="rp-flex-between" style="margin-bottom: 32px; position: relative; z-index: 1;">
+                <div>
+                  <h3 style="margin: 0 0 4px 0; font-size: 16px; color: rgba(255,255,255,0.7); font-weight: 500;">Current Invoice</h3>
+                  <p style="margin: 0; font-size: 14px; color: rgba(255,255,255,0.5);">#INV-2026-04</p>
+                </div>
+                <div class="chip"></div>
+              </div>
+              
+              <div style="position: relative; z-index: 1;">
+                <p style="margin: 0 0 8px 0; color: rgba(255,255,255,0.6); font-size: 13px; text-transform: uppercase; letter-spacing: 1px;">Amount Due</p>
+                <div class="card-number" id="billing-current-due"></div>
+                <div id="invoice-total" style="display:none;"></div> <!-- hidden hook -->
+              </div>
+              
+              <div class="rp-flex-between" style="position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; margin-top: 24px;">
+                <div>
+                  <p style="margin: 0 0 4px 0; color: rgba(255,255,255,0.6); font-size: 12px; text-transform: uppercase;">Due Date</p>
+                  <p id="invoice-due-date" style="margin: 0; font-weight: 600; font-size: 15px; letter-spacing: 1px;"></p>
+                </div>
+                <button id="pay-now-btn" class="rp-btn-gold">Pay Securely</button>
+              </div>
+
+              <!-- hidden details for JS to populate -->
+              <div id="invoice-items" style="display: none;"></div>
+            </div>
+
+            <!-- All Caught Up state -->
+            <div id="all-caught-up" class="glass-card rp-mb-8 hidden" style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+              <div style="width: 64px; height: 64px; background: #D1FAE5; color: #059669; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <h3 style="font-size: 24px; font-weight: 700; margin: 0 0 8px 0;">Account Settled</h3>
+              <p style="color: var(--rp-text-muted); margin: 0;">Your April 2026 invoice is paid in full.</p>
+            </div>
+
+            <div class="glass-card rp-mb-8">
+              <h3 style="font-size: 18px; font-weight: 700; margin: 0 0 24px 0;">Payment Method</h3>
+              <div style="display: flex; align-items: center; gap: 16px; padding: 16px; border: 1px solid rgba(0,0,0,0.1); border-radius: 12px; background: white;">
+                <div style="width: 48px; height: 32px; background: #1A1A1A; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-style: italic; font-weight: 700; font-size: 12px;">VISA</div>
+                <div>
+                  <p style="font-weight: 600; font-size: 15px; margin: 0 0 2px 0;">Visa ending in 4829</p>
+                  <p style="color: var(--rp-text-muted); font-size: 13px; margin: 0;">Expires 12/28</p>
+                </div>
+                <button class="rp-action-link" style="margin-left: auto;">Edit</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card">
+            <h3 style="font-size: 20px; font-weight: 700; margin: 0 0 24px 0;">Payment History</h3>
+            <table class="rp-table">
+              <thead>
+                <tr>
+                  <th>Period</th>
+                  <th>Amount</th>
+                  <th>Date</th>
+                  <th>Method</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="payment-history-body"></tbody>
+            </table>
+          </div>
+        </main>
+
+        <!-- Maintenance -->
+        <main id="maintenance" class="page-content">
+          <div style="margin-bottom: 40px;">
+            <h2 style="font-size: 32px; font-weight: 700; margin: 0 0 8px 0; letter-spacing: -1px;">Maintenance</h2>
+            <p style="color: var(--rp-text-muted); font-size: 16px; margin: 0;">Request repairs and track progress.</p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 32px;">
+            <div class="glass-card">
+              <h3 style="font-size: 20px; font-weight: 700; margin: 0 0 24px 0;">New Request</h3>
+              <form id="maintenance-form">
+                <div class="rp-mb-4">
+                  <label for="ticket-title" class="rp-label">Issue Title</label>
+                  <input id="ticket-title" type="text" class="rp-input" placeholder="Brief description of the problem" />
+                </div>
+                <div class="rp-grid-2 rp-mb-4">
+                  <div>
+                    <label for="ticket-category" class="rp-label">Category</label>
+                    <select id="ticket-category" class="rp-input">
+                      <option value="">Select category...</option>
+                      <option value="Plumbing">Plumbing</option>
+                      <option value="Electrical">Electrical</option>
+                      <option value="HVAC">HVAC</option>
+                      <option value="Appliance">Appliance</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="ticket-priority" class="rp-label">Priority</label>
+                    <select id="ticket-priority" class="rp-input">
+                      <option value="">Select priority...</option>
+                      <option value="Low">Low</option>
+                      <option value="Medium">Medium</option>
+                      <option value="High">High</option>
+                      <option value="Urgent">Urgent</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="rp-mb-6">
+                  <label for="ticket-description" class="rp-label">Detailed Description</label>
+                  <textarea id="ticket-description" class="rp-input" rows="4" placeholder="Please provide details so we can best assist you..."></textarea>
+                </div>
+                <div class="rp-flex-between">
+                  <button type="button" style="background: transparent; border: 1px solid rgba(0,0,0,0.1); padding: 12px 24px; border-radius: 12px; font-weight: 600; cursor: pointer;">Add Photo</button>
+                  <button id="submit-ticket-btn" type="submit" class="rp-btn-primary">Submit Request</button>
+                </div>
+              </form>
+            </div>
+
+            <div>
+              <h3 style="font-size: 20px; font-weight: 700; margin: 0 0 24px 0;">Active Requests <span id="resident-tickets-count" style="color: var(--rp-teal); font-weight: 400;"></span></h3>
+              <div id="resident-tickets-list" style="display: flex; flex-direction: column; gap: 16px;"></div>
+            </div>
+          </div>
+        </main>
+
+        <!-- Visitor Pass -->
+        <main id="visitor" class="page-content">
+          <div style="margin-bottom: 40px;">
+            <h2 style="font-size: 32px; font-weight: 700; margin: 0 0 8px 0; letter-spacing: -1px;">VIP Passes</h2>
+            <p style="color: var(--rp-text-muted); font-size: 16px; margin: 0;">Generate secure, scannable access passes for your guests.</p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px;">
+            <div class="glass-card">
+              <h3 style="font-size: 20px; font-weight: 700; margin: 0 0 24px 0;">Create Pass</h3>
+              <form id="visitor-form">
+                <div class="rp-mb-4">
+                  <label for="guest-name" class="rp-label">Guest Full Name</label>
+                  <input id="guest-name" type="text" class="rp-input" placeholder="e.g., Jonathan Doe" />
+                </div>
+                <div class="rp-grid-2 rp-mb-6">
+                  <div>
+                    <label for="visit-date" class="rp-label">Date of Arrival</label>
+                    <input id="visit-date" type="date" class="rp-input" />
+                  </div>
+                  <div>
+                    <label for="visit-purpose" class="rp-label">Pass Type</label>
+                    <select id="visit-purpose" class="rp-input">
+                      <option value="Personal Visit">Personal Visit</option>
+                      <option value="Delivery">Delivery</option>
+                      <option value="Contractor / Repair">Contractor / Repair</option>
+                      <option value="Event Guest">Event Guest</option>
+                    </select>
+                  </div>
+                </div>
+                <button id="generate-pass-btn" type="submit" class="rp-btn-primary" style="width: 100%;">Issue Digital Pass</button>
+              </form>
+            </div>
+
+            <div>
+              <h3 style="font-size: 20px; font-weight: 700; margin: 0 0 24px 0;">Active Passes <span id="resident-passes-count" style="color: var(--rp-teal); font-weight: 400;"></span></h3>
+              <div id="resident-passes-list" style="display: flex; flex-direction: column; gap: 16px;"></div>
+            </div>
+          </div>
+        </main>
+
+        <!-- Profile -->
+        <main id="profile" class="page-content">
+          <div style="margin-bottom: 40px;">
+            <h2 style="font-size: 32px; font-weight: 700; margin: 0 0 8px 0; letter-spacing: -1px;">My Profile</h2>
+            <p style="color: var(--rp-text-muted); font-size: 16px; margin: 0;">Manage your account details and security.</p>
+          </div>
+
+          <div class="glass-card" style="max-width: 800px;">
+            <div style="display: flex; align-items: center; gap: 24px; margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(0,0,0,0.05);">
+              <div style="width: 80px; height: 80px; border-radius: 20px; background: var(--rp-teal); color: white; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 700; box-shadow: 0 8px 24px rgba(15, 118, 110, 0.3);">S</div>
+              <div>
+                <h3 style="font-size: 24px; font-weight: 700; margin: 0 0 4px 0;">Sarah Mitchell</h3>
+                <p style="color: var(--rp-text-muted); margin: 0;">Unit 4B • Premium Member</p>
+              </div>
+            </div>
+
+            <form id="profile-form">
+              <div class="rp-grid-2 rp-mb-4">
+                <div>
+                  <label class="rp-label">Full Name</label>
+                  <input type="text" class="rp-input" value="Sarah Mitchell" />
+                </div>
+                <div>
+                  <label class="rp-label">Email Address</label>
+                  <input type="email" class="rp-input" value="sarah.m@example.com" />
+                </div>
+              </div>
+              <div class="rp-grid-2 rp-mb-8">
+                <div>
+                  <label class="rp-label">Phone Number</label>
+                  <input type="tel" class="rp-input" value="+1 (555) 0123-4567" />
+                </div>
+                <div>
+                  <label class="rp-label">Emergency Contact</label>
+                  <input type="text" class="rp-input" value="David Mitchell (Husband)" />
+                </div>
+              </div>
+              
+              <h4 style="font-size: 18px; font-weight: 700; margin: 0 0 24px 0;">Security</h4>
+              <div class="rp-grid-2 rp-mb-6">
+                <div>
+                  <label class="rp-label">Current Password</label>
+                  <input type="password" class="rp-input" placeholder="••••••••" />
+                </div>
+                <div>
+                  <label class="rp-label">New Password</label>
+                  <input type="password" class="rp-input" placeholder="Enter new password" />
+                </div>
+              </div>
+              <div style="display: flex; justify-content: flex-end;">
+                <button type="submit" class="rp-btn-primary">Save Changes</button>
+              </div>
+            </form>
+          </div>
+        </main>
+
+      </div>
+    </div>
+
+    <!-- Modals & Toasts -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <div id="payment-modal" class="modal-overlay">
+      <div class="glass-card" style="max-width: 400px; width: 100%; text-align: center; position: relative;">
+        <div style="width: 64px; height: 64px; background: #D1FAE5; color: #059669; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px auto;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <h3 style="font-size: 24px; font-weight: 700; margin: 0 0 16px 0;">Payment Successful</h3>
+        <p style="color: var(--rp-text-muted); margin: 0 0 32px 0;">Your payment of <span id="modal-amount" style="font-weight: 700; color: #059669;"></span> has been securely processed.</p>
+        
+        <div style="background: rgba(0,0,0,0.03); border-radius: 12px; padding: 16px; text-align: left; margin-bottom: 32px;">
+          <div class="rp-flex-between" style="margin-bottom: 8px;">
+            <span style="font-size: 13px; color: var(--rp-text-muted);">Transaction ID</span>
+            <span id="modal-txn" style="font-size: 13px; font-weight: 600; font-family: monospace;"></span>
+          </div>
+          <div class="rp-flex-between">
+            <span style="font-size: 13px; color: var(--rp-text-muted);">Date</span>
+            <span id="modal-date" style="font-size: 13px; font-weight: 600;"></span>
+          </div>
+        </div>
+        
+        <button class="rp-btn-primary close-modal" style="width: 100%;">Done</button>
+      </div>
+    </div>
+
+    <script src="../src/data/mockData.js"></script>
+    <script src="../src/shared/api.js"></script>
+    <script src="../src/shared/ui.js"></script>
+    <script src="../src/pages/resident.js"></script>
+  </body>
+</html>

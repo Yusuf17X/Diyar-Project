@@ -1,0 +1,30 @@
+enum OccupancyType {
+  OWNER
+  TENANT
+  FAMILY_MEMBER
+  PROPERTY_MANAGER
+}
+
+model ResidentUnitAssignment {
+  id         String @id @default(cuid())
+  propertyId String @map("property_id")
+  userId     String @map("user_id")
+  unitId     String @map("unit_id")
+
+  occupancyType        OccupancyType @map("occupancy_type")
+  isBillingResponsible Boolean       @default(false) @map("is_billing_responsible")
+  startsAt             DateTime      @default(now()) @map("starts_at")
+  endsAt               DateTime?     @map("ends_at")
+  isCurrent            Boolean       @default(true)  @map("is_current")
+  createdAt            DateTime      @default(now()) @map("created_at")
+  updatedAt            DateTime      @updatedAt       @map("updated_at")
+
+  property Property @relation(fields: [propertyId], references: [id])
+  user     User     @relation(fields: [userId], references: [id])
+  unit     Unit     @relation(fields: [unitId], references: [id])
+
+  @@index([propertyId, createdAt])
+  @@index([propertyId, unitId, isCurrent, isBillingResponsible])
+  @@unique([userId, unitId, startsAt])
+  @@map("resident_unit_assignments")
+}

@@ -1,0 +1,21 @@
+enum SecurityEventType {
+  ENTRY
+  EXIT
+  DENIED
+}
+
+model SecurityLog {
+  id         String            @id @default(cuid())
+  propertyId String            @map("property_id")
+  passId     String?           @map("pass_id")
+  actorId    String            @map("actor_id")
+  eventType  SecurityEventType @map("event_type")
+  details    String
+  occurredAt DateTime          @default(now()) @map("occurred_at")
+
+  property Property     @relation(fields: [propertyId], references: [id])
+  pass     VisitorPass? @relation(fields: [passId], references: [id])
+  actor    User         @relation(fields: [actorId], references: [id])
+
+  @@map("security_logs")
+}

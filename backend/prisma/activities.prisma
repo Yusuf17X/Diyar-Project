@@ -1,0 +1,98 @@
+enum ActivityEvent {
+  // Authentication & Security Alerts
+  USER_LOGIN
+  USER_LOGIN_FAILED
+  PASSWORD_CHANGED
+  PASSWORD_RESET
+  SECURITY_ALERT
+
+  // User & Tenant Management
+  USER_CREATED
+  USER_UPDATED
+  USER_SUSPENDED
+  USER_DELETED
+  RESIDENT_ASSIGNED
+  RESIDENT_UNASSIGNED
+  RESIDENT_ASSIGNMENT_CREATED
+  RESIDENT_ASSIGNMENT_UPDATED
+  RESIDENT_ASSIGNMENT_DELETED
+
+  // Billing & Invoices
+  INVOICE_CREATED
+  INVOICE_GENERATED
+  INVOICE_PUBLISHED
+  INVOICE_ITEM_MODIFIED
+  INVOICE_UPDATED
+  INVOICE_DELETED
+  PAYMENT_CREATED
+  PAYMENT_RECEIVED
+  PAYMENT_FAILED
+  PAYMENT_REFUNDED
+  PAYMENT_UPDATED
+  PAYMENT_DELETED
+
+  // Maintenance
+  TICKET_CREATED
+  TICKET_UPDATED
+  TICKET_ASSIGNED
+  TICKET_RESOLVED
+  TICKET_CANCELLED
+  TICKET_DELETED
+
+  // Access Control (Visitor Passes)
+  VISITOR_PASS_CREATED
+  VISITOR_PASS_USED
+  VISITOR_PASS_REVOKED
+  VISITOR_PASS_UPDATED
+  VISITOR_PASS_DELETED
+
+  // Announcements
+  ANNOUNCEMENT_CREATED
+  ANNOUNCEMENT_UPDATED
+  ANNOUNCEMENT_DELETED
+
+  // Property & Unit Management
+  UNIT_CREATED
+  UNIT_UPDATED
+  UNIT_DELETED
+  PROPERTY_CREATED
+  PROPERTY_UPDATED
+  PROPERTY_DELETED
+
+  // Security Logs
+  SECURITY_LOG_CREATED
+  SECURITY_LOG_UPDATED
+  SECURITY_LOG_DELETED
+}
+
+enum EntityType {
+  USER
+  TICKET
+  PAYMENT
+  INVOICE
+  VISITOR_PASS
+  ANNOUNCEMENT
+  SECURITY_LOG
+  RESIDENT_ASSIGNMENT
+  PROPERTY
+  UNIT
+}
+
+model Activity {
+  id         String        @id @default(cuid())
+  propertyId String        @map("property_id")
+  actorId    String        @map("actor_id")
+  event      ActivityEvent
+  message    String        @db.VarChar(500)
+
+  entityType EntityType @map("entity_type")
+  entityId   String     @map("entity_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  property Property @relation(fields: [propertyId], references: [id])
+  actor    User     @relation("ActivityActor", fields: [actorId], references: [id])
+
+  @@index([propertyId, createdAt])
+  @@map("activities")
+}

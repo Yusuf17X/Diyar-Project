@@ -1,0 +1,134 @@
+{
+  "billingPeriod": "2026-05",
+  "generatedAt": "2026-05-01T00:00:00.000Z",
+  "description": "Monthly invoice items for all occupied units — May 2026",
+  "properties": [
+    {
+      "propertyName": "Palm Heights",
+      "units": [
+        {
+          "unitCode": "A-101",
+          "items": [
+            { "type": "RENT", "label": "Rent", "amount": 120000, "sortOrder": 1 },
+            { "type": "WATER", "label": "Water Usage", "amount": 15000, "sortOrder": 2 },
+            { "type": "ELECTRICITY", "label": "Electricity", "amount": 22000, "sortOrder": 3 }
+          ]
+        },
+        {
+          "unitCode": "A-102",
+          "items": [
+            { "type": "RENT", "label": "Rent", "amount": 125000, "sortOrder": 1 },
+            { "type": "WATER", "label": "Water Usage", "amount": 12000, "sortOrder": 2 },
+            { "type": "ELECTRICITY", "label": "Electricity", "amount": 18500, "sortOrder": 3 }
+          ]
+        },
+        {
+          "unitCode": "A-201",
+          "items": [
+            { "type": "RENT", "label": "Rent", "amount": 130000, "sortOrder": 1 },
+            { "type": "WATER", "label": "Water Usage", "amount": 17500, "sortOrder": 2 },
+            { "type": "ELECTRICITY", "label": "Electricity", "amount": 24000, "sortOrder": 3 }
+          ]
+        },
+        {
+          "unitCode": "B-202",
+          "items": [
+            { "type": "RENT", "label": "Rent", "amount": 115000, "sortOrder": 1 },
+            { "type": "WATER", "label": "Water Usage", "amount": 14000, "sortOrder": 2 },
+            { "type": "ELECTRICITY", "label": "Electricity", "amount": 20000, "sortOrder": 3 }
+          ]
+        }
+      ]
+    },
+    {
+      "propertyName": "Cedar Point",
+      "units": [
+        {
+          "unitCode": "C-101",
+          "items": [
+            { "type": "RENT", "label": "Rent", "amount": 135000, "sortOrder": 1 },
+            { "type": "WATER", "label": "Water Usage", "amount": 13500, "sortOrder": 2 },
+            { "type": "ELECTRICITY", "label": "Electricity", "amount": 21000, "sortOrder": 3 }
+          ]
+        },
+        {
+          "unitCode": "C-102",
+          "items": [
+            { "type": "RENT", "label": "Rent", "amount": 128000, "sortOrder": 1 },
+            { "type": "WATER", "label": "Water Usage", "amount": 16000, "sortOrder": 2 },
+            { "type": "ELECTRICITY", "label": "Electricity", "amount": 23500, "sortOrder": 3 }
+          ]
+        },
+        {
+          "unitCode": "C-201",
+          "items": [
+            { "type": "RENT", "label": "Rent", "amount": 140000, "sortOrder": 1 },
+            { "type": "WATER", "label": "Water Usage", "amount": 11000, "sortOrder": 2 },
+            { "type": "ELECTRICITY", "label": "Electricity", "amount": 19000, "sortOrder": 3 }
+          ]
+        },
+        {
+          "unitCode": "C-202",
+          "items": [
+            { "type": "RENT", "label": "Rent", "amount": 122000, "sortOrder": 1 },
+            { "type": "WATER", "label": "Water Usage", "amount": 15500, "sortOrder": 2 },
+            { "type": "ELECTRICITY", "label": "Electricity", "amount": 25000, "sortOrder": 3 }
+          ]
+        },
+        {
+          "unitCode": "C-301",
+          "items": [
+            { "type": "RENT", "label": "Rent", "amount": 145000, "sortOrder": 1 },
+            { "type": "WATER", "label": "Water Usage", "amount": 18000, "sortOrder": 2 },
+            { "type": "ELECTRICITY", "label": "Electricity", "amount": 22500, "sortOrder": 3 }
+          ]
+        }
+      ]
+    },
+    {
+      "propertyName": "Nile Vista",
+      "units": [
+        {
+          "unitCode": "N-101",
+          "items": [
+            { "type": "RENT", "label": "Rent", "amount": 110000, "sortOrder": 1 },
+            { "type": "WATER", "label": "Water Usage", "amount": 12500, "sortOrder": 2 },
+            { "type": "ELECTRICITY", "label": "Electricity", "amount": 17500, "sortOrder": 3 }
+          ]
+        },
+        {
+          "unitCode": "N-102",
+          "items": [
+            { "type": "RENT", "label": "Rent", "amount": 118000, "sortOrder": 1 },
+            { "type": "WATER", "label": "Water Usage", "amount": 14500, "sortOrder": 2 },
+            { "type": "ELECTRICITY", "label": "Electricity", "amount": 21500, "sortOrder": 3 }
+          ]
+        },
+        {
+          "unitCode": "N-103",
+          "items": [
+            { "type": "RENT", "label": "Rent", "amount": 125000, "sortOrder": 1 },
+            { "type": "WATER", "label": "Water Usage", "amount": 16500, "sortOrder": 2 },
+            { "type": "ELECTRICITY", "label": "Electricity", "amount": 23000, "sortOrder": 3 }
+          ]
+        },
+        {
+          "unitCode": "N-201",
+          "items": [
+            { "type": "RENT", "label": "Rent", "amount": 132000, "sortOrder": 1 },
+            { "type": "WATER", "label": "Water Usage", "amount": 13000, "sortOrder": 2 },
+            { "type": "ELECTRICITY", "label": "Electricity", "amount": 19500, "sortOrder": 3 }
+          ]
+        },
+        {
+          "unitCode": "N-203",
+          "items": [
+            { "type": "RENT", "label": "Rent", "amount": 128000, "sortOrder": 1 },
+            { "type": "WATER", "label": "Water Usage", "amount": 15000, "sortOrder": 2 },
+            { "type": "ELECTRICITY", "label": "Electricity", "amount": 20500, "sortOrder": 3 }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+/* ===== App Shell ===== */
+.sidebar-header {
+  padding: 24px 24px 16px;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.brand-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  color: white;
+  background: var(--c-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.brand-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--c-text-primary);
+  letter-spacing: -0.02em;
+}
+
+.brand-subtitle {
+  font-size: 11px;
+  color: var(--c-text-muted);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.sidebar-nav-container {
+  flex: 1;
+  padding: 24px 16px;
+}
+
+.bold-text-6 {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--c-text-muted);
+  padding: 0 12px;
+  margin-bottom: 12px;
+}
+
+.user-profile-section {
+  padding: 20px;
+  border-top: 1px solid var(--c-border);
+  background: var(--c-bg);
+}
+
+.avatar-bold-text-8 {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 700;
+  background: white;
+  border: 1px solid var(--c-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.bold-text-9 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--c-text-primary);
+}
+
+.text-10 {
+  font-size: 12px;
+  color: var(--c-text-secondary);
+}
+
+.text-11 {
+  font-size: 13px;
+  color: var(--c-text-secondary);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+
+.custom-style-12 {
+  margin: 0 8px;
+  color: var(--c-border-hover);
+}
+
+.bold-13 {
+  color: var(--c-text-primary);
+  font-weight: 600;
+}
+
+.custom-style-14 {
+  transform: scale(0.9);
+  transform-origin: right;
+}
+
+.avatar-15 {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--c-text-secondary);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.avatar-danger-16 {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c-danger);
+  border: 2px solid var(--c-surface);
+}
+
+.container-xl {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.container-lg {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.container-md {
+  max-width: 1000px;
+  margin: 0 auto;
+}

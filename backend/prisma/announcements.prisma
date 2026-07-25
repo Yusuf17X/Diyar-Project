@@ -1,0 +1,26 @@
+enum AnnouncementCategory {
+  GENERAL
+  MAINTENANCE
+  EVENT
+  EMERGENCY
+  OTHER
+}
+
+model Announcement {
+  id              String               @id @default(uuid())
+  propertyId      String               @map("property_id")
+  createdByUserId String               @map("created_by_user_id")
+  title           String
+  category        AnnouncementCategory
+  message         String               @db.VarChar(255)
+  publishAt       DateTime             @map("publish_at")
+  expiresAt       DateTime             @map("expires_at")
+  createdAt       DateTime             @default(now()) @map("created_at")
+  updatedAt       DateTime             @updatedAt       @map("updated_at")
+
+  property      Property @relation(fields: [propertyId], references: [id])
+  createdByUser User     @relation(fields: [createdByUserId], references: [id])
+
+  @@index([propertyId, createdAt])
+  @@map("announcements")
+}

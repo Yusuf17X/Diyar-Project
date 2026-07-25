@@ -1,0 +1,21 @@
+model Property {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt       @map("updated_at")
+
+  users         User[]
+  units         Unit[]
+  announcements Announcement[]
+  invoices      Invoice[]
+  tickets       MaintenanceTicket[]
+  assignments   ResidentUnitAssignment[]
+  securityLogs  SecurityLog[]
+  visitorPasses VisitorPass[]
+  invoiceItems  InvoiceItem[]
+  activities    Activity[]
+
+  @@index([name])
+  @@index([createdAt])
+  @@map("properties")
+}

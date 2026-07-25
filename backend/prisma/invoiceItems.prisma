@@ -1,0 +1,30 @@
+enum InvoiceItemType {
+  RENT
+  WATER
+  ELECTRICITY
+  SERVICE_CHARGE
+  OTHER
+}
+
+model InvoiceItem {
+  id         String  @id @default(cuid())
+  invoiceId  String? @map("invoice_id")
+  propertyId String  @map("property_id")
+  unitId     String  @map("unit_id")
+
+  type   InvoiceItemType
+  label  String
+  amount Int
+
+  billingPeriod String @map("billing_period")
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  invoice  Invoice? @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  property Property @relation(fields: [propertyId], references: [id])
+  unit     Unit     @relation(fields: [unitId], references: [id])
+
+  @@index([invoiceId])
+  @@index([propertyId, unitId, billingPeriod])
+  @@map("invoice_items")
+}

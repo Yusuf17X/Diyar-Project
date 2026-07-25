@@ -1,0 +1,47 @@
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  RESIDENT
+  SECURITY
+  MAINTENANCE
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+model User {
+  id                   String     @id @default(cuid())
+  name                 String     @db.VarChar(100)
+  role                 UserRole   @default(RESIDENT)
+  email                String     @unique @db.VarChar(255)
+  password             String
+  passwordChangedAt    DateTime?  @map("password_changed_at")
+  passwordResetToken   String?    @map("password_reset_token")
+  passwordResetExpires DateTime?  @map("password_reset_expires")
+  phone                String?    @db.VarChar(20)
+  emergencyContact     String?    @db.VarChar(20)                                @map("emergency_contact")
+  status               UserStatus @default(ACTIVE)
+  createdAt            DateTime   @default(now())                                @map("created_at")
+  updatedAt            DateTime   @updatedAt                                      @map("updated_at")
+  propertyId           String?    @map("property_id")
+
+  property Property? @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  announcements       Announcement[]
+  invoices            Invoice[]
+  ticketsReported     MaintenanceTicket[]      @relation("TicketReporter")
+  ticketsAssigned     MaintenanceTicket[]      @relation("TicketAssignee")
+  assignments         ResidentUnitAssignment[]
+  securityLogs        SecurityLog[]
+  visitorPasses       VisitorPass[]
+  activitiesPerformed Activity[]               @relation("ActivityActor")
+
+  @@index([propertyId, createdAt])
+  @@index([propertyId, role, status])
+  @@index([passwordResetToken, passwordResetExpires])
+  @@unique([propertyId, email])
+  @@map("users")
+}

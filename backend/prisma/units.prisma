@@ -1,0 +1,26 @@
+enum OccupancyStatus {
+  VACANT
+  OCCUPIED
+  MAINTENANCE
+}
+
+model Unit {
+  id              String          @id @default(cuid())
+  propertyId      String          @map("property_id")
+  code            String          @db.VarChar(20)
+  occupancyStatus OccupancyStatus @map("occupancy_status")
+  createdAt       DateTime        @default(now()) @map("created_at")
+  updatedAt       DateTime        @updatedAt       @map("updated_at")
+
+  property Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  assignments   ResidentUnitAssignment[]
+  invoices      Invoice[]
+  tickets       MaintenanceTicket[]
+  visitorPasses VisitorPass[]
+  invoiceItems  InvoiceItem[]
+
+  @@index([propertyId, createdAt])
+  @@unique([propertyId, code])
+  @@map("units")
+}

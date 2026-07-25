@@ -1,0 +1,23 @@
+enum PaymentMethod {
+  CREDIT_CARD
+  CASH
+}
+
+model Payment {
+  id        String @id @default(cuid())
+  invoiceId String @map("invoice_id")
+
+  amount                Int
+  method                PaymentMethod @default(CREDIT_CARD)
+  stripeSessionId       String?       @unique @map("stripe_session_id")
+  stripePaymentIntentId String?       @unique @map("stripe_payment_intent_id")
+
+  paidAt    DateTime? @map("paid_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  invoice Invoice @relation(fields: [invoiceId], references: [id])
+
+  @@index([invoiceId])
+  @@index([paidAt])
+  @@map("payments")
+}

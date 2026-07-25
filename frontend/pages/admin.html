@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diyar - Admin Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../src/styles/components.css" />
+    <link rel="stylesheet" href="../src/styles/admin-premium.css" />
+  </head>
+  <body class="admin-premium">
+    <div class="ap-layout">
+      <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+      <!-- Floating Sidebar -->
+      <aside id="sidebar" class="ap-sidebar">
+        <div class="ap-brand">
+          <div class="ap-brand-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+              <path d="M9 22v-4h6v4"></path>
+            </svg>
+          </div>
+          <div>
+            <h1 style="font-size: 20px; font-weight: 700; margin: 0; letter-spacing: -0.5px;">Diyar</h1>
+            <p style="color: rgba(255,255,255,0.7); font-size: 13px; margin: 0;">Admin Portal</p>
+          </div>
+        </div>
+
+        <nav class="ap-nav">
+          <a class="sidebar-link" href="../gateway.html">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            Home
+          </a>
+          <button class="sidebar-link active" data-target="dashboard">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            Dashboard
+          </button>
+          <button class="sidebar-link" data-target="residents">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            Residents
+          </button>
+          <button class="sidebar-link" data-target="billing">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+            Billing & Invoices
+          </button>
+          <button class="sidebar-link" data-target="maintenance">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+            Maintenance
+          </button>
+          <button class="sidebar-link" data-target="announcements">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            Announcements
+          </button>
+          <button class="sidebar-link" data-target="security">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            Security
+          </button>
+        </nav>
+
+        <div class="ap-user">
+          <div class="ap-user-avatar">A</div>
+          <div>
+            <p style="font-weight: 600; font-size: 15px; margin: 0;">Admin User</p>
+            <p style="color: rgba(255,255,255,0.7); font-size: 13px; margin: 0;">Property Manager</p>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <div class="ap-main">
+        <header class="ap-topbar">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <button id="mobile-menu-btn" style="display: none;">Menu</button>
+            <p style="font-size: 14px; color: var(--ap-text-muted); font-weight: 500;">
+              Portal / <span id="breadcrumb-text" style="color: var(--ap-text-main); font-weight: 600;">Dashboard</span>
+            </p>
+          </div>
+          <a href="./resident.html" style="color: var(--ap-accent); text-decoration: none; font-weight: 600; font-size: 14px; border: 1px solid rgba(59, 130, 246, 0.2); padding: 8px 16px; border-radius: 8px;">Switch To Resident View</a>
+        </header>
+
+        <!-- Dashboard -->
+        <main id="dashboard" class="page-content active">
+          <div class="ap-hero">
+            <div style="position: relative; z-index: 1;">
+              <h2>Executive Dashboard</h2>
+              <p>Overview of your compound's performance for April 2026</p>
+            </div>
+          </div>
+
+          <div class="ap-grid-4">
+            <div class="glass-card ap-metric-card" style="padding: 24px;">
+              <div>
+                <p class="ap-metric-label">Total Residents</p>
+                <h3 id="val-total-residents" class="ap-metric-value"></h3>
+              </div>
+              <div class="ap-metric-icon" style="background: #E0E7FF; color: #4F46E5;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              </div>
+            </div>
+            <div class="glass-card ap-metric-card" style="padding: 24px;">
+              <div>
+                <p class="ap-metric-label">Pending Maint.</p>
+                <h3 id="val-pending-maint" class="ap-metric-value"></h3>
+              </div>
+              <div class="ap-metric-icon" style="background: #FEF3C7; color: #D97706;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+              </div>
+            </div>
+            <div class="glass-card ap-metric-card" style="padding: 24px;">
+              <div>
+                <p class="ap-metric-label">Total Revenue</p>
+                <h3 id="val-revenue" class="ap-metric-value"></h3>
+              </div>
+              <div class="ap-metric-icon" style="background: #D1FAE5; color: #059669;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+              </div>
+            </div>
+            <div class="glass-card ap-metric-card" style="padding: 24px;">
+              <div>
+                <p class="ap-metric-label">Unpaid Invoices</p>
+                <h3 id="val-unpaid" class="ap-metric-value"></h3>
+              </div>
+              <div class="ap-metric-icon" style="background: #FFE4E6; color: #E11D48;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="ap-grid-2">
+            <div class="glass-card">
+              <h3 class="glass-card-header">Revenue Trend <span style="font-size: 14px; font-weight: 500; color: var(--ap-text-muted); float: right;">Last 6 months</span></h3>
+              <div id="revenue-bar-chart" class="bar-chart"></div>
+            </div>
+            <div class="glass-card">
+              <h3 class="glass-card-header">Occupancy <span style="font-size: 14px; font-weight: 500; color: var(--ap-text-muted); float: right;">100 total units</span></h3>
+              <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
+                <div id="occupancy-donut" class="donut-chart">
+                  <div class="donut-hole">
+                    <span id="occupancy-rate-val" style="font-size: 28px; font-weight: 700; color: var(--ap-text-main);"></span>
+                    <span style="font-size: 13px; color: var(--ap-text-muted); font-weight: 600;">Occupied</span>
+                  </div>
+                </div>
+              </div>
+              <div id="occupancy-legend" style="display: flex; justify-content: center; gap: 24px;"></div>
+            </div>
+          </div>
+
+          <div class="glass-card">
+            <h3 class="glass-card-header">Recent Activity</h3>
+            <div class="ap-table-wrapper">
+              <table class="ap-table">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Resident</th>
+                    <th>Amount</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="activity-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </main>
+
+        <!-- Residents -->
+        <main id="residents" class="page-content">
+          <div class="ap-flex-between" style="margin-bottom: 40px;">
+            <div>
+              <h2 style="font-size: 32px; font-weight: 700; margin: 0 0 8px 0; letter-spacing: -1px;">Resident Management</h2>
+              <p style="color: var(--ap-text-muted); font-size: 16px; margin: 0;">View and manage all residents in the compound</p>
+            </div>
+            <button class="ap-btn-primary" id="add-resident-btn">Add New Resident</button>
+          </div>
+
+          <div class="glass-card">
+            <div class="ap-flex-between" style="margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid rgba(0,0,0,0.05);">
+              <h3 style="font-size: 20px; font-weight: 700; margin: 0;">Resident Directory</h3>
+              <input type="text" style="width: 240px; padding: 10px 16px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; background: rgba(255,255,255,0.8);" placeholder="Search residents...">
+            </div>
+            <div class="ap-table-wrapper">
+              <table class="ap-table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Unit</th>
+                    <th>Contact</th>
+                    <th>Status</th>
+                    <th>Joined Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-residents-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </main>
+
+        <!-- Billing -->
+        <main id="billing" class="page-content">
+          <div class="ap-flex-between" style="margin-bottom: 40px;">
+            <div>
+              <h2 style="font-size: 32px; font-weight: 700; margin: 0 0 8px 0; letter-spacing: -1px;">Billing & Invoices</h2>
+              <p style="color: var(--ap-text-muted); font-size: 16px; margin: 0;">Manage financial transactions and resident invoicing</p>
+            </div>
+            <button class="ap-btn-primary" id="batch-invoice-btn">Generate Batch Invoices</button>
+          </div>
+
+          <div class="ap-grid-3">
+            <div class="glass-card ap-metric-card" style="padding: 24px;">
+              <div>
+                <p class="ap-metric-label">Total Revenue (MTD)</p>
+                <h3 class="ap-metric-value">$42,500</h3>
+              </div>
+              <div class="ap-metric-icon" style="background: #D1FAE5; color: #059669;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+              </div>
+            </div>
+            <div class="glass-card ap-metric-card" style="padding: 24px;">
+              <div>
+                <p class="ap-metric-label">Overdue Invoices</p>
+                <h3 class="ap-metric-value">12</h3>
+              </div>
+              <div class="ap-metric-icon" style="background: #FFE4E6; color: #E11D48;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              </div>
+            </div>
+            <div class="glass-card ap-metric-card" style="padding: 24px;">
+              <div>
+                <p class="ap-metric-label">Outstanding Balance</p>
+                <h3 class="ap-metric-value">$8,200</h3>
+              </div>
+              <div class="ap-metric-icon" style="background: #FEF3C7; color: #D97706;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card">
+            <h3 class="glass-card-header">Recent Invoices</h3>
+            <div class="ap-table-wrapper">
+              <table class="ap-table">
+                <thead>
+                  <tr>
+                    <th>Invoice ID</th>
+                    <th>Resident</th>
+                    <th>Amount</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-billing-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </main>
+
+        <!-- Maintenance -->
+        <main id="maintenance" class="page-content">
+          <div style="margin-bottom: 40px;">
+            <h2 style="font-size: 32px; font-weight: 700; margin: 0 0 8px 0; letter-spacing: -1px;">Maintenance Overview</h2>
+            <p style="color: var(--ap-text-muted); font-size: 16px; margin: 0;">Track and manage all maintenance requests across the compound</p>
+          </div>
+
+          <div class="ap-grid-3">
+            <div class="glass-card ap-metric-card" style="padding: 24px;">
+              <div>
+                <p class="ap-metric-label">Pending Requests</p>
+                <h3 id="val-maint-pending" class="ap-metric-value"></h3>
+              </div>
+              <div class="ap-metric-icon" style="background: #FEF3C7; color: #D97706;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              </div>
+            </div>
+            <div class="glass-card ap-metric-card" style="padding: 24px;">
+              <div>
+                <p class="ap-metric-label">Resolved This Month</p>
+                <h3 id="val-maint-resolved" class="ap-metric-value"></h3>
+              </div>
+              <div class="ap-metric-icon" style="background: #D1FAE5; color: #059669;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              </div>
+            </div>
+            <div class="glass-card ap-metric-card" style="padding: 24px;">
+              <div>
+                <p class="ap-metric-label">Avg. Resolution Time</p>
+                <h3 class="ap-metric-value">1.8 days</h3>
+              </div>
+              <div class="ap-metric-icon" style="background: #E0E7FF; color: #4F46E5;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card">
+            <h3 class="glass-card-header">Maintenance Requests</h3>
+            <div class="ap-table-wrapper">
+              <table class="ap-table">
+                <thead>
+                  <tr>
+                    <th>Ticket ID</th>
+                    <th>Unit</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-maint-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </main>
+
+        <!-- Announcements -->
+        <main id="announcements" class="page-content">
+          <div class="ap-flex-between" style="margin-bottom: 40px;">
+            <div>
+              <h2 style="font-size: 32px; font-weight: 700; margin: 0 0 8px 0; letter-spacing: -1px;">Announcements</h2>
+              <p style="color: var(--ap-text-muted); font-size: 16px; margin: 0;">Broadcast messages and alerts to all residents</p>
+            </div>
+            <button class="ap-btn-primary" id="new-announcement-btn">New Announcement</button>
+          </div>
+
+          <div class="glass-card">
+            <h3 class="glass-card-header">Active Announcements</h3>
+            <div id="admin-announcements-list" style="display: flex; flex-direction: column; gap: 16px;"></div>
+          </div>
+        </main>
+
+        <!-- Security -->
+        <main id="security" class="page-content">
+          <div style="margin-bottom: 40px;">
+            <h2 style="font-size: 32px; font-weight: 700; margin: 0 0 8px 0; letter-spacing: -1px;">Security & Access Control</h2>
+            <p style="color: var(--ap-text-muted); font-size: 16px; margin: 0;">Monitor compound access and visitor verification</p>
+          </div>
+
+          <div class="ap-grid-5-3-2">
+            <div class="glass-card" style="text-align: center;">
+              <h3 class="glass-card-header" style="text-align: left;">Visitor Verification</h3>
+              <div style="padding: 40px 0;">
+                <div style="width: 100px; height: 100px; background: #E0E7FF; color: #4F46E5; border-radius: 24px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px auto;">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                </div>
+                <p style="font-size: 24px; font-weight: 700; margin: 0 0 8px 0;">Ready to Scan</p>
+                <p style="color: var(--ap-text-muted); margin: 0 0 32px 0;">Point camera at visitor QR code or enter ID manually</p>
+                <div style="display: flex; gap: 8px; justify-content: center;">
+                  <input type="text" id="visitor-id-input" class="ap-input" style="width: 300px; margin-bottom: 0;" placeholder="Enter Visitor ID (e.g. V-X92B7)">
+                  <button class="ap-btn-primary" id="verify-visitor-btn" style="padding: 14px 32px;">Verify</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="glass-card" style="padding: 24px;">
+              <h3 class="glass-card-header" style="margin-bottom: 16px;">Security Logs</h3>
+              <div class="ap-table-wrapper">
+                <table class="ap-table">
+                  <thead>
+                    <tr>
+                      <th>Time</th>
+                      <th>Event</th>
+                      <th>Details</th>
+                    </tr>
+                  </thead>
+                  <tbody id="security-logs-body"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Modals & Toasts -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <div id="admin-modal" class="modal-overlay">
+      <div class="glass-card" style="max-width: 600px; width: 100%; text-align: left;">
+        <div id="modal-header" style="margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid rgba(0,0,0,0.05);">
+          <h3 style="font-size: 24px; font-weight: 700; margin: 0 0 8px 0;" id="admin-modal-title">Action</h3>
+          <p style="color: var(--ap-text-muted); margin: 0;" id="admin-modal-subtitle">Details for this action</p>
+        </div>
+        <div id="admin-modal-body" style="margin-bottom: 32px;"></div>
+        <div style="display: flex; gap: 16px; margin-top: 32px;">
+          <button class="ap-btn-secondary" style="flex: 1;" id="close-admin-modal">Cancel</button>
+          <button class="ap-btn-primary" style="flex: 1;" id="confirm-admin-modal">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="scanner-modal" class="modal-overlay">
+      <div class="glass-card" style="max-width: 500px; width: 100%; padding: 0; overflow: hidden; background: white;">
+        <div style="padding: 24px; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <h3 style="font-size: 20px; font-weight: 700; margin: 0;">Visitor Verification</h3>
+            <p style="font-size: 12px; color: var(--ap-text-muted); margin: 4px 0 0 0;">Smart Access Control System</p>
+          </div>
+          <button id="close-scanner" style="background: transparent; border: none; cursor: pointer; color: var(--ap-text-muted);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
+        </div>
+        <div style="background: var(--ap-bg); height: 360px; position: relative; display: flex; align-items: center; justify-content: center;">
+          <div style="width: 240px; height: 240px; border: 3px solid var(--ap-accent); border-radius: 24px; box-shadow: 0 0 0 4000px rgba(255,255,255,0.7); position: relative;">
+            <div style="position: absolute; top: -10px; left: -10px; width: 30px; height: 30px; border-top: 5px solid var(--ap-accent); border-left: 5px solid var(--ap-accent); border-radius: 8px 0 0 0;"></div>
+            <div style="position: absolute; top: -10px; right: -10px; width: 30px; height: 30px; border-top: 5px solid var(--ap-accent); border-right: 5px solid var(--ap-accent); border-radius: 0 8px 0 0;"></div>
+            <div style="position: absolute; bottom: -10px; left: -10px; width: 30px; height: 30px; border-bottom: 5px solid var(--ap-accent); border-left: 5px solid var(--ap-accent); border-radius: 0 0 0 8px;"></div>
+            <div style="position: absolute; bottom: -10px; right: -10px; width: 30px; height: 30px; border-bottom: 5px solid var(--ap-accent); border-right: 5px solid var(--ap-accent); border-radius: 0 0 8px 0;"></div>
+          </div>
+          <div style="position: absolute; top: 60px; width: 240px; height: 3px; background: linear-gradient(to right, transparent, var(--ap-accent), transparent); box-shadow: 0 0 20px var(--ap-accent); animation: scan 2.5s ease-in-out infinite; opacity: 0.8;"></div>
+          <div style="position: absolute; bottom: 32px; background: rgba(15, 23, 42, 0.8); color: white; padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 500; backdrop-filter: blur(4px);">
+            Scanning for QR Code...
+          </div>
+        </div>
+        <div style="padding: 24px; text-align: center;">
+          <p style="font-size: 14px; font-weight: 600; margin: 0 0 4px 0;">Optical Sensor Active</p>
+          <p style="font-size: 12px; color: var(--ap-text-muted); margin: 0;">Please hold the resident-generated pass steadily in front of the camera.</p>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      @keyframes scan {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(240px); }
+      }
+    </style>
+
+    <script src="../src/data/mockData.js"></script>
+    <script src="../src/shared/api.js"></script>
+    <script src="../src/shared/ui.js"></script>
+    <script src="../src/pages/admin.js"></script>
+  </body>
+</html>
