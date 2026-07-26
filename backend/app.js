@@ -5,6 +5,7 @@ import { fileURLToPath } from "url";
 import morgan from "morgan";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
+import cors from "cors";
 import hpp from "hpp";
 import xssSanitizer from "./utils/xssSanitizer.js";
 
@@ -34,7 +35,10 @@ const app = express();
 // 1. Set Security HTTP Headers
 app.use(helmet());
 
-// 2. Development Logging
+// 2. CORS
+app.use(cors());
+
+// 3. Development Logging
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
@@ -114,8 +118,7 @@ app.get("/payment-success", (req, res) => {
 });
 
 // 8. Unhandled Routes (404)
-// .all() means all the verbs(HTTP methods): GET, POST, etc...
-app.all("/{*splat}", (req, res, next) => {
+app.use((req, res, next) => {
   next(new AppError(`Cant find ${req.originalUrl}`, 404));
 });
 

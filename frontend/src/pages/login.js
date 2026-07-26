@@ -15,6 +15,7 @@ function initLoginPage() {
 
             try {
                 const response = await api.login(email, password);
+                localStorage.setItem("diyar_token", response.token);
                 const user = response.data.user;
                 
                 let destination = "./resident.html";

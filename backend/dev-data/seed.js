@@ -15,6 +15,7 @@ async function resetData() {
   // Wipe in dependency order to avoid foreign key conflicts.
   await prisma.$transaction([
     prisma.securityLog.deleteMany(),
+    prisma.activity.deleteMany(),
     prisma.payment.deleteMany(),
     prisma.invoiceItem.deleteMany(),
     prisma.invoice.deleteMany(),

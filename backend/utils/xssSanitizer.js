@@ -24,9 +24,9 @@ const clean = (data) => {
  */
 const xssSanitizer = () => {
   return (req, res, next) => {
-    if (req.body) req.body = clean(req.body);
-    if (req.query) req.query = clean(req.query);
-    if (req.params) req.params = clean(req.params);
+    if (req.body) clean(req.body);
+    if (req.query) clean(req.query);
+    if (req.params) clean(req.params);
     next();
   };
 };
