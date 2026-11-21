@@ -38,7 +38,6 @@ export const createPaymentSession = catchAsync(async (req, res, next) => {
     payment_intent_data: {
       metadata: {
         invoiceId: invoice.id,
-        stripeSessionId: session.id,
       },
     },
     line_items: [
@@ -94,7 +93,7 @@ const createPaymentCheckout = async (event) => {
       create: {
         invoiceId,
         amount,
-        stripeSessionId,
+        stripeSessionId: stripeSessionId || null,
         stripePaymentIntentId: paymentIntent.id,
         paidAt: new Date(),
       },
@@ -159,6 +158,13 @@ export const createCashPayment = catchAsync(async (req, res, next) => {
 
   if (!invoice) {
     return next(new AppError("Invoice not found!", 404));
+  }
+
+  if (
+    req.user.role !== "SUPER_ADMIN" &&
+    invoice.propertyId !== req.user.propertyId
+  ) {
+    return next(new AppError("Unauthorized to pay this invoice", 403));
   }
 
   if (invoice.status === "PAID") {

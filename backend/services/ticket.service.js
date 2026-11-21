@@ -71,6 +71,9 @@ export const handleUpdateTicket = async ({ id, body, user }) => {
       where: { id },
       data: {
         status: body.status || ticket.status,
+        ...(body.status === "RESOLVED" && ticket.status !== "RESOLVED"
+          ? { resolvedAt: new Date() }
+          : {}),
       },
     });
 
@@ -109,6 +112,9 @@ export const handleUpdateTicket = async ({ id, body, user }) => {
         assignedToId: body.assignedToId,
         status: body.status || ticket.status,
         priority: body.priority || ticket.priority,
+        ...(body.status === "RESOLVED" && ticket.status !== "RESOLVED"
+          ? { resolvedAt: new Date() }
+          : {}),
       },
     });
 

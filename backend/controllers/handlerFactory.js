@@ -4,6 +4,24 @@ import PrismaQueryBuilder from "../utils/prismaQueryBuilder.js";
 import prisma from "../utils/prisma.js";
 import auditEmitter from "../utils/auditEmitter.js";
 
+const protectedFields = [
+  "id",
+  "createdAt",
+  "updatedAt",
+  "password",
+  "passwordResetToken",
+  "passwordResetExpires",
+];
+
+const filterBody = (body, allowedFields) =>
+  Object.fromEntries(
+    Object.entries(body || {}).filter(
+      ([field]) =>
+        !protectedFields.includes(field) &&
+        (allowedFields === null || allowedFields.includes(field)),
+    ),
+  );
+
 // Map Prisma model names to our Activity Schema enum `EntityTypes`
 const getAuditEntityType = (modelName) => {
   const map = {
@@ -81,7 +99,11 @@ export const deleteOne = (Model, options = {}) =>
 
 export const updateOne = (Model, options = {}) =>
   catchAsync(async (req, res, next) => {
-    const { enforcePropertyId = true, userField = "userId" } = options;
+    const {
+      enforcePropertyId = true,
+      userField = "userId",
+      allowedFields = null,
+    } = options;
 
     // Build baseFilter to restrict records based on user role and property
     const baseFilter = {};
@@ -115,10 +137,15 @@ export const updateOne = (Model, options = {}) =>
     if (!existingRecord)
       return next(new AppError("No record with that ID!", 404));
 
-    // Update record with provided body data
+    const data = filterBody(req.body, allowedFields);
+    if (req.user?.role !== "SUPER_ADMIN") {
+      delete data.role;
+      delete data.propertyId;
+    }
+
     const updatedRecord = await prisma[Model].update({
       where: { id: req.params.id },
-      data: req.body,
+      data,
     });
 
     if (req.user && req.user.propertyId) {
@@ -142,26 +169,32 @@ export const createOne = (Model, options = {}) =>
   catchAsync(async (req, res, next) => {
     if (!req.body) return next(new AppError("Please provide some data!", 400));
 
-    const { enforcePropertyId = true, userField = "userId" } = options;
+    const {
+      enforcePropertyId = true,
+      userField = "userId",
+      allowedFields = null,
+    } = options;
+    const data = filterBody(req.body, allowedFields);
 
+    // Apply trusted defaults after filtering so allowlists do not remove them.
     if (req.user) {
       if (req.user.role === "RESIDENT") {
-        if (!req.body[userField] && Model !== "user") {
-          req.body[userField] = req.user.id;
+        if (!data[userField] && Model !== "user") {
+          data[userField] = req.user.id;
         }
       }
       if (
         enforcePropertyId &&
         req.user.propertyId &&
-        !req.body.propertyId &&
+        !data.propertyId &&
         Model !== "property"
       ) {
-        req.body.propertyId = req.user.propertyId;
+        data.propertyId = req.user.propertyId;
       }
     }
 
     const newRecord = await prisma[Model].create({
-      data: req.body,
+      data,
     });
 
     if (req.user && req.user.propertyId) {

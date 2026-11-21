@@ -21,8 +21,21 @@ export const getUser = factory.getOne("user", { include: { property: true } });
 export const getAllUsers = factory.getAll("user", {
   include: { property: true },
 });
-export const createUser = factory.createOne("user");
-export const updateUser = factory.updateOne("user");
+const writableUserFields = [
+  "name",
+  "email",
+  "phone",
+  "emergencyContact",
+  "status",
+  "propertyId",
+];
+
+export const createUser = factory.createOne("user", {
+  allowedFields: writableUserFields,
+});
+export const updateUser = factory.updateOne("user", {
+  allowedFields: [...writableUserFields, "role"],
+});
 export const deleteUser = factory.deleteOne("user");
 
 export const updateMe = catchAsync(async (req, res, next) => {
