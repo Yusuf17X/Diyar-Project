@@ -17,6 +17,10 @@ export const getAllTickets = catchAsync(async (req, res, next) => {
     }
   }
 
+  if (req.user.role !== "SUPER_ADMIN") {
+    query.propertyId = req.user.propertyId;
+  }
+
   if (req.user.role === "RESIDENT") query.userId = req.user.id;
 
   if (req.user.role === "MAINTENANCE") query.assignedToId = req.user.id;
@@ -36,6 +40,10 @@ export const getAllTickets = catchAsync(async (req, res, next) => {
 
 export const getTicket = catchAsync(async (req, res, next) => {
   const query = {};
+
+  if (req.user.role !== "SUPER_ADMIN") {
+    query.propertyId = req.user.propertyId;
+  }
 
   if (req.user.role === "RESIDENT") {
     query.userId = req.user.id;
@@ -98,21 +106,55 @@ export const uploadTicketImages = catchAsync(async (req, res, next) => {
 });
 
 export const createTicket = catchAsync(async (req, res, next) => {
-  const { title, category, description, priority, imageUrls, unitId } = req.body;
+  const { title, category, description, priority, imageUrls, unitId } =
+    req.body;
 
   let resolvedUnitId = unitId;
   if (!resolvedUnitId) {
     if (req.user.role === "RESIDENT") {
       const assignment = await prisma.residentUnitAssignment.findFirst({
-        where: { userId: req.user.id, isCurrent: true },
+        where: {
+          userId: req.user.id,
+          propertyId: req.user.propertyId,
+          isCurrent: true,
+        },
         select: { unitId: true },
       });
       if (!assignment) {
-        return next(new AppError("No unit assignment found for your account", 400));
+        return next(
+          new AppError("No unit assignment found for your account", 400),
+        );
       }
       resolvedUnitId = assignment.unitId;
     } else {
       return next(new AppError("unitId is required", 400));
+    }
+  }
+
+  const unit = await prisma.unit.findUnique({
+    where: { id: resolvedUnitId },
+  });
+
+  if (!unit) {
+    return next(new AppError("Unit not found", 404));
+  }
+
+  if (unit.propertyId !== req.user.propertyId) {
+    return next(new AppError("Unit does not belong to your property", 403));
+  }
+
+  if (req.user.role === "RESIDENT" && unitId) {
+    const assignment = await prisma.residentUnitAssignment.findFirst({
+      where: {
+        userId: req.user.id,
+        unitId: resolvedUnitId,
+        propertyId: req.user.propertyId,
+        isCurrent: true,
+      },
+    });
+
+    if (!assignment) {
+      return next(new AppError("You are not assigned to this unit", 403));
     }
   }
 
@@ -162,4 +204,3 @@ export const updateTicket = catchAsync(async (req, res, next) => {
 });
 
 export const deleteTicket = factory.deleteOne("maintenanceTicket");
-

@@ -6,8 +6,26 @@ import sendSMS from "../utils/sms.js";
 
 export const getAllInvoices = factory.getAll("invoice");
 export const getInvoice = factory.getOne("invoice");
-export const createInvoice = factory.createOne("invoice");
-export const updateInvoice = factory.updateOne("invoice");
+const writableInvoiceFields = [
+  "propertyId",
+  "userId",
+  "unitId",
+  "invoiceNumber",
+  "billingPeriod",
+  "issueDate",
+  "dueDate",
+  "status",
+  "subtotal",
+  "previousBalance",
+  "total",
+];
+
+export const createInvoice = factory.createOne("invoice", {
+  allowedFields: writableInvoiceFields,
+});
+export const updateInvoice = factory.updateOne("invoice", {
+  allowedFields: writableInvoiceFields,
+});
 export const deleteInvoice = factory.deleteOne("invoice");
 
 export const publishAllDraftInvoices = catchAsync(async (req, res, next) => {

@@ -18,16 +18,30 @@ export const getAnnouncement = factory.getOne("announcement", {
   },
 });
 
+const writableAnnouncementFields = [
+  "title",
+  "category",
+  "message",
+  "publishAt",
+  "expiresAt",
+  "propertyId",
+];
+
 export const createAnnouncement = catchAsync(async (req, res, next) => {
   if (!req.body) return next(new AppError("Please provide some data!", 400));
 
-  req.body.createdByUserId = req.user.id;
-  if (req.user.propertyId && !req.body.propertyId) {
-    req.body.propertyId = req.user.propertyId;
+  const data = Object.fromEntries(
+    Object.entries(req.body).filter(([field]) =>
+      writableAnnouncementFields.includes(field),
+    ),
+  );
+  data.createdByUserId = req.user.id;
+  if (req.user.propertyId && !data.propertyId) {
+    data.propertyId = req.user.propertyId;
   }
 
   const newRecord = await prisma.announcement.create({
-    data: req.body,
+    data,
   });
 
   if (req.user && req.user.propertyId) {
@@ -47,5 +61,7 @@ export const createAnnouncement = catchAsync(async (req, res, next) => {
   });
 });
 
-export const updateAnnouncement = factory.updateOne("announcement");
+export const updateAnnouncement = factory.updateOne("announcement", {
+  allowedFields: writableAnnouncementFields,
+});
 export const deleteAnnouncement = factory.deleteOne("announcement");

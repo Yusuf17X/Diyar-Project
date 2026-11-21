@@ -26,6 +26,7 @@ export const getResidentOverview = async (req) => {
   });
 
   const lastAnnouncements = await prisma.announcement.findMany({
+    where: { propertyId: req.user.propertyId },
     orderBy: { createdAt: "desc" },
     take: 5,
   });

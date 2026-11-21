@@ -12,6 +12,31 @@ export const generateVisitorPass = catchAsync(async (req, res, next) => {
     );
   }
 
+  const unit = await prisma.unit.findUnique({ where: { id: unitId } });
+
+  if (!unit) {
+    return next(new AppError("Unit not found", 404));
+  }
+
+  if (unit.propertyId !== req.user.propertyId) {
+    return next(new AppError("Unit does not belong to your property", 403));
+  }
+
+  if (req.user.role === "RESIDENT") {
+    const assignment = await prisma.residentUnitAssignment.findFirst({
+      where: {
+        userId: req.user.id,
+        unitId,
+        propertyId: req.user.propertyId,
+        isCurrent: true,
+      },
+    });
+
+    if (!assignment) {
+      return next(new AppError("You are not assigned to this unit", 403));
+    }
+  }
+
   const visitorPass = await prisma.visitorPass.create({
     data: {
       userId: req.user.id,
@@ -55,7 +80,20 @@ export const useVisitorPass = catchAsync(async (req, res, next) => {
     where: { qrPayload: token },
   });
 
-  if (!visitorPass || visitorPass.status !== "ACTIVE") {
+  if (!visitorPass) {
+    return next(new AppError("Invalid QR code!", 401));
+  }
+
+  if (
+    req.user.role !== "SUPER_ADMIN" &&
+    visitorPass.propertyId !== req.user.propertyId
+  ) {
+    return next(
+      new AppError("Visitor pass does not belong to your property", 403),
+    );
+  }
+
+  if (visitorPass.status !== "ACTIVE") {
     return next(new AppError("Invalid QR code!", 401));
   }
 
@@ -130,4 +168,3 @@ export const cancelVisitorPass = catchAsync(async (req, res, next) => {
     },
   });
 });
-
